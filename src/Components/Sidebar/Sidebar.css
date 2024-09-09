@@ -1,0 +1,13 @@
+#sidebar-wrapper {
+    min-height: 100vh;
+    width: 250px;
+  }
+  
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -250px;
+  }
+  
+  .list-group-item {
+    border: none;
+  }
+  

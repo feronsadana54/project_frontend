@@ -1,0 +1,22 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.sidebar {
+  height: 100%;
+}
+
+.content {
+  padding: 20px;
+  margin-left: 250px;
+}
+
+table {
+  margin-top: 20px;
+}
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
