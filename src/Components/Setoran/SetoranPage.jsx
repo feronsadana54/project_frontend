@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Button, Form, Modal, Table } from "react-bootstrap";
-import DashboardLayout from "../../Layouts/DashboardLayouts";
+import React, { useState, useEffect } from 'react';
+import { Button, Form, Modal, Table } from 'react-bootstrap';
+import DashboardLayout from '../../Layouts/DashboardLayouts';
 
 const SetoranPage = () => {
   const [setorans, setSetorans] = useState([]);
@@ -8,41 +8,38 @@ const SetoranPage = () => {
   const [editMode, setEditMode] = useState(false);
   const [currentSetoran, setCurrentSetoran] = useState({
     id: null,
-    nama: "",
-    jumlah: "",
-    tanggal: "",
+    nama: '',
+    jumlah: '',
+    tanggal: ''
   });
 
   useEffect(() => {
-    const storedSetorans = JSON.parse(localStorage.getItem("setorans")) || [];
+    const storedSetorans = JSON.parse(localStorage.getItem('setorans')) || [];
     setSetorans(storedSetorans);
   }, []);
 
   const handleSave = () => {
     if (editMode) {
-      const updatedSetorans = setorans.map((setoran) =>
+      const updatedSetorans = setorans.map(setoran =>
         setoran.id === currentSetoran.id ? currentSetoran : setoran
       );
       setSetorans(updatedSetorans);
-      localStorage.setItem("setorans", JSON.stringify(updatedSetorans));
+      localStorage.setItem('setorans', JSON.stringify(updatedSetorans));
     } else {
-      const newSetoran = {
-        ...currentSetoran,
-        id: Date.now(),
-      };
+      const newSetoran = { ...currentSetoran, id: Date.now() };
       const updatedSetorans = [...setorans, newSetoran];
       setSetorans(updatedSetorans);
-      localStorage.setItem("setorans", JSON.stringify(updatedSetorans));
+      localStorage.setItem('setorans', JSON.stringify(updatedSetorans));
     }
     setShow(false);
     setEditMode(false);
-    setCurrentSetoran({ id: null, nama: "", jumlah: "", tanggal: "" });
+    setCurrentSetoran({ id: null, nama: '', jumlah: '', tanggal: '' });
   };
 
   const handleDelete = (id) => {
-    const updatedSetorans = setorans.filter((setoran) => setoran.id !== id);
+    const updatedSetorans = setorans.filter(setoran => setoran.id !== id);
     setSetorans(updatedSetorans);
-    localStorage.setItem("setorans", JSON.stringify(updatedSetorans));
+    localStorage.setItem('setorans', JSON.stringify(updatedSetorans));
   };
 
   const handleEdit = (setoran) => {
@@ -52,7 +49,7 @@ const SetoranPage = () => {
   };
 
   const handleAdd = () => {
-    setCurrentSetoran({ id: null, nama: "", jumlah: "", tanggal: "" });
+    setCurrentSetoran({ id: null, nama: '', jumlah: '', tanggal: '' });
     setEditMode(false);
     setShow(true);
   };
@@ -103,9 +100,7 @@ const SetoranPage = () => {
 
         <Modal show={show} onHide={() => setShow(false)}>
           <Modal.Header closeButton>
-            <Modal.Title>
-              {editMode ? "Edit Setoran" : "Add New Setoran"}
-            </Modal.Title>
+            <Modal.Title>{editMode ? 'Edit Setoran' : 'Add New Setoran'}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form>
@@ -114,12 +109,7 @@ const SetoranPage = () => {
                 <Form.Control
                   type="text"
                   value={currentSetoran.nama}
-                  onChange={(e) =>
-                    setCurrentSetoran({
-                      ...currentSetoran,
-                      nama: e.target.value,
-                    })
-                  }
+                  onChange={(e) => setCurrentSetoran({ ...currentSetoran, nama: e.target.value })}
                 />
               </Form.Group>
               <Form.Group>
@@ -127,12 +117,7 @@ const SetoranPage = () => {
                 <Form.Control
                   type="number"
                   value={currentSetoran.jumlah}
-                  onChange={(e) =>
-                    setCurrentSetoran({
-                      ...currentSetoran,
-                      jumlah: e.target.value,
-                    })
-                  }
+                  onChange={(e) => setCurrentSetoran({ ...currentSetoran, jumlah: e.target.value })}
                 />
               </Form.Group>
               <Form.Group>
@@ -140,12 +125,7 @@ const SetoranPage = () => {
                 <Form.Control
                   type="date"
                   value={currentSetoran.tanggal}
-                  onChange={(e) =>
-                    setCurrentSetoran({
-                      ...currentSetoran,
-                      tanggal: e.target.value,
-                    })
-                  }
+                  onChange={(e) => setCurrentSetoran({ ...currentSetoran, tanggal: e.target.value })}
                 />
               </Form.Group>
             </Form>
@@ -155,7 +135,7 @@ const SetoranPage = () => {
               Close
             </Button>
             <Button variant="primary" onClick={handleSave}>
-              {editMode ? "Update" : "Save"}
+              {editMode ? 'Update' : 'Save'}
             </Button>
           </Modal.Footer>
         </Modal>

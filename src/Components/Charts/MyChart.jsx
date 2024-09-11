@@ -1,28 +1,20 @@
-import React, { useLayoutEffect } from "react";
+import React, { useEffect } from "react";
 import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
+import DashboardLayout from "../../Layouts/DashboardLayout";
 
-const MyChart = () => {
-  useLayoutEffect(() => {
+const DashboardPage = () => {
+  useEffect(() => {
     let root = am5.Root.new("chartdiv");
 
     root.setThemes([am5themes_Animated.new(root)]);
 
-    let chart = root.container.children.push(
-      am5xy.XYChart.new(root, {
-        panX: true,
-        panY: true,
-        wheelX: "panX",
-        wheelY: "zoomX",
-        pinchZoomX: true,
-      })
-    );
+    let chart = root.container.children.push(am5xy.XYChart.new(root, {}));
 
     let xAxis = chart.xAxes.push(
       am5xy.CategoryAxis.new(root, {
         categoryField: "category",
-        renderer: am5xy.AxisRendererX.new(root, {}),
       })
     );
 
@@ -34,7 +26,6 @@ const MyChart = () => {
 
     let series = chart.series.push(
       am5xy.ColumnSeries.new(root, {
-        name: "Series",
         xAxis: xAxis,
         yAxis: yAxis,
         valueYField: "value",
@@ -49,16 +40,15 @@ const MyChart = () => {
     ]);
 
     return () => {
-      root.dispose(); 
+      root.dispose();
     };
   }, []);
 
   return (
-    <div
-      id="chartdiv"
-      style={{ width: "500px", height: "500px" }}
-    ></div>
+    <DashboardLayout>
+      <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div>
+    </DashboardLayout>
   );
 };
 
-export default MyChart;
+export default DashboardPage;
